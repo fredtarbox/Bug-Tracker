@@ -1,0 +1,27 @@
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
+Your choice: 2
+        *****Changing The Status*****
+Enter the bugname: showfileanewbug
+Enter the bug id: 1
+Enter the bug status by choosing one of the following:
+ 1. Not yet assigned
+ 2. In process
+ 3. Fixed
+ 4. Delivered
+Your choice: 2
+
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit

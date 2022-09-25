@@ -1,0 +1,30 @@
+********************** WELCOME TO THE BUG TRACKING SYSTEM **********************
+         Please login by giving username and password below:
+ Username: admin
+ Password: 12345678
+                 Welcome admin!!
+
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
+Your choice: 4
+        *****Adding/Removing a User*****
+Enter 1 to remove a user and otherwise to add: 0
+Enter the username of the user to be added: fred
+Enter the password of the new user: 87654321
+Enter 0 if the user to be added is an admin and any other value if otherwise0
+
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
+Your choice:

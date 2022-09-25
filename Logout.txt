@@ -1,0 +1,12 @@
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
+Your choice: 6
+        Logging Out.............
+         Please login by giving username and password below:
+ Username:

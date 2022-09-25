@@ -1,0 +1,55 @@
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
+Your choice: 3
+        *****Reporting the Bug*****
+        Possible Bugs:
+ Volume in drive P is DMACData
+ Volume Serial Number is A8FF-1019
+
+ Directory of P:\BugTracker\Data
+
+09/24/2022  04:57 PM               324 bugtest-1.txt
+09/24/2022  04:24 PM               464 bugtracker-1.txt
+09/25/2022  11:00 AM               435 chicken-1.txt
+09/25/2022  11:33 AM               108 pig-1.txt
+09/25/2022  11:37 AM               303 SaveScreen-1.txt
+09/25/2022  11:48 AM               397 ShowFileANewBug-1.txt
+09/25/2022  10:55 AM               298 turkey-1.txt
+               7 File(s)          2,329 bytes
+               0 Dir(s)  212,719,779,840 bytes free
+Enter the bugname: showfileanewbug
+Enter the bug id: 1
+********* ..\Data\showfileanewbug-1.txt *********
+DATE AND TIME : Sun Sep 25 11:38:30 2022
+BUG ID    :    1
+
+BUG FILED BY: admin
+
+BUG PRIORITY: Minor
+
+BUG DESCRIPTION:
+     Hoping to capture process 1. File a new bug
+     both the pig, chicken, and turkey failed.
+     #
+
+DATE AND TIME: Sun Sep 25 11:38:30 2022
+BUG STATUS: NOT YET ASSIGNED
+Status of the bug updated by admin at Sun Sep 25 11:48:22 2022
+
+Bug status:     In process
+
+
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit

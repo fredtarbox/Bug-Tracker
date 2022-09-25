@@ -1,0 +1,18 @@
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
+Your choice: 5
+        *****Reporting Login History*****
+
+admin logged in at Sun Sep 25 11:30:50 2022
+
+admin logged in at Sun Sep 25 11:34:00 2022
+
+admin logged in at Sun Sep 25 11:38:22 2022
+
+admin logged in at Sun Sep 25 11:57:13 2022

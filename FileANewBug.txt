@@ -1,0 +1,37 @@
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
+Your choice: 1
+**********FILING A BUG***********
+Enter the name of the bug (Maximum 25 characters):
+ShowFileANewBug
+Filename : ..\Data\ShowFileANewBug-1.txt
+BUG ID:1
+Enter name of bug priority: Severity is of 5 types:
+    Critical, Major, Moderate, Minor, and Cosmetic.
+Minor
+Enter the bug description:
+(Fifty (50) lines maximum - last line must only contain '#'
+Hoping to capture process 1. File a new bug
+both the pig, chicken, and turkey failed.
+#
+Status of bug:
+   1. NOT YET ASSIGNED
+   2. IN PROCESS
+   3. FIXED
+   4. DELIVERED
+ENTER THE NUMBER OF YOUR CHOICE: 1
+
+Please choose from an option below:
+1. File a new bug
+2. Change the status of the bug
+3. Get report of the bugs
+4. Add/Remove a user to the database
+5. Check login history
+6. Logout
+7. Exit
