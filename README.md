@@ -8,7 +8,7 @@ With Fogbugz switching from free to monthly charge, thought a simple bug tracker
 
 Saved all Fogbugz bugs as Microsoft Word docs. Plan to import them either straight from Word or from a .txt file.
 
-First step was to abhixsmasher version to run; then added some features and comments to make easier. 
+First step was to get abhixsmasher version to run on Visual Studio 2022. Left the .sln project in github in Visual Studio 2017 (I think); then added some features and comments to make easier. 
 
 Separated data into Data Folder. Set up to look like this:
     Bug-Tracker
