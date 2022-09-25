@@ -11,9 +11,9 @@ Saved all Fogbugz bugs as Microsoft Word docs. Plan to import them either straig
 First step was to get abhixsmasher version to run on Visual Studio 2022. Left the .sln project in github in Visual Studio 2017 (I think); then added some features and comments to make easier. 
 
 Separated data into Data Folder. Set up to look like this:
-    Bug-Tracker
-        Data
-        Bin
+    Bug-Tracker folder
+        Data subfolder
+        Bin subfolder
         
  That is where it stands now.       
         
