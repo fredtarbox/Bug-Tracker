@@ -12,15 +12,16 @@ using namespace std;
 /*Function for logging in the user*/
 int check_user(string us,string pw)
 {
-    int fg;
-    string user(""),pass(""),test;
-    fstream my_file("Admin.txt");
-    fstream log_file("Login.txt",iostream::app);
+    int fg =0;
+    string user("admin"),pass("12345678"),test;
+    fstream my_file("..\\Data\\Admin.out");
+    fstream log_file("..\\Data\\Login.out",iostream::app);
     while(!my_file.eof())
     {
         my_file>>user;
         my_file>>pass;
         if(user==us && pass==pw)
+
         {
             fg=1;
             time_t CurrentTime;
@@ -64,58 +65,112 @@ int check_user(string us,string pw)
 }
 
 
-void filebug(int id,string user)
+int filebug(int id, string user)
 {
-    printf("**********FILING A BUG***********\n");
+    int n = 0;
+    char op[200];
     time_t CurrentTime;
-    time(&CurrentTime);
-    char name[20], bugtype[50];
-    char bugdescription[1000];
+    char name[200], bugtype[50];
+    char bugdescription[50][100];
     char bugpriority[30];
     int bugstatus;
+    struct stat statbuf;
+    char newname[200];
+    int i;
     FILE* ptr;
-    printf("Enter the name of the bug:\n");
-    scanf("%s", name);
+    printf("**********FILING A BUG***********\n");
+    time(&CurrentTime);
+    while (1) {
+        memset(name, 0, sizeof(name));
+        printf("Enter the name of the bug (Maximum 25 characters):\n");
+        scanf("%s", name);
+        if (strlen(name) >= 25)
+        {
+            printf("Name of the bug is too long; try again\n");
+        }
+        else {
+            break;
+        }
+    }
     char ids[10];
-    itoa(id, ids, 10);
-    strcat(name, ids);
-    char ex[] = ".txt";
-    strcat(name, ex);
-    printf("Filename :%s\n", name);
+    while (1) {
+        _itoa(id, ids, 10);
+        
+        char ex[] = ".txt";
+        memset(newname, 0, sizeof(newname));
+        strcpy(newname, "..\\Data\\");
+        strcat(newname, name);
+        strcat(newname, "-");
+        strcat(newname, ids);
+        strcat(newname, ex);
+        printf("Filename : %s\n", newname);
+        if (stat(newname, &statbuf) == 0)
+        {
+            id++;
+        }
+        else {
+            strcpy(name, newname);
+            break;
+        }
+    }
     ptr = fopen(name, "w");
-    if (ptr == NULL)
-        printf("cannot create file!!!\n");
+    if (ptr == NULL) {
+        printf("Quiting -- cannot create file!!![%s]\n", name);
+        return -1;
+    }
     fprintf(ptr, "DATE AND TIME : %s",
-            ctime(&CurrentTime));
+        ctime(&CurrentTime));
     fprintf(ptr, "BUG ID    :    %d\n", id);
     fprintf(ptr, "\n");
     printf("BUG ID:%d\n", id);
-    int n=user.length();
-    char op[n+1];
-    strcpy(op,user.c_str());
+    n = (int)user.length();
+    //char op[n+1];
+    strcpy(op, user.c_str());
     fprintf(ptr, "BUG FILED BY: %s\n",
-            op);
+        op);
     fprintf(ptr, "\n");
-    printf("Enter bug priority:\n");
-    scanf(" %[^\n]s", bugpriority);
+    while (1) {
+        memset(bugpriority, 0, sizeof(bugpriority));
+        printf("Enter name of bug priority: Severity is of 5 types:\n    Critical, Major, Moderate, Minor, and Cosmetic.\n");
+        scanf(" %[^\n]s", bugpriority);
+        if (strcmp(bugpriority, "Critical") == 0)break;
+        if (strcmp(bugpriority, "Major") == 0)break;
+        if (strcmp(bugpriority, "Moderate") == 0)break;
+        if (strcmp(bugpriority, "Minor") == 0)break;
+        if (strcmp(bugpriority, "Cosmetic") == 0)break;
+        printf("Incorrect priority name entered -- try again\n");
+
+    }
     fprintf(ptr, "BUG PRIORITY: %s\n",
-            bugpriority);
+        bugpriority);
     fprintf(ptr, "\n");
-    printf("Enter the bug description:\n");
-    scanf(" %[^\n]s", bugdescription);
-    fprintf(ptr, "BUG DESCRIPTION: %s\n",
-            bugdescription);
+    printf("Enter the bug description:\n(Fifty (50) lines maximum - last line must only contain '#'\n");
+    for (i = 0; i < 50; i++)
+    {
+    
+    scanf(" %[^\n]s", bugdescription[i]);
+    if (bugdescription[i][0] == '#') 
+        {
+        break;
+        }
+    }
+    fprintf(ptr, "BUG DESCRIPTION: \n");
+    for (i = 0; i < 50; i++) {
+        fprintf(ptr, "     %s\n",  bugdescription[i]);
+        if (bugdescription[i][0] == '#') break;
+
+    }
     fprintf(ptr, "\n");
     printf("Status of bug:\n");
-    printf("1. NOT YET ASSIGNED\n");
-    printf("2. IN PROCESS\n3. FIXED\n");
-    printf("4. DELIVERED\nENTER YOUR CHOICE: ");
+    printf("   1. NOT YET ASSIGNED\n");
+    printf("   2. IN PROCESS\n   3. FIXED\n");
+    printf("   4. DELIVERED\nENTER THE NUMBER OF YOUR CHOICE: ");
     int j;
     scanf("%d", &j);
     // Date and time of Bug Creation
     fprintf(ptr, "DATE AND TIME: %s",
             ctime(&CurrentTime));
-    fprintf(ptr, "BUG STATUS:");
+    fprintf(ptr, "BUG STATUS: ");
     switch (j) {
     case 1:
         fprintf(ptr, "NOT YET ASSIGNED\n");
@@ -134,21 +189,24 @@ void filebug(int id,string user)
         break;
     }
     fclose(ptr);
+    return 0;
 }
 /*Function to change the status of a bug*/
 void changestat(string user)
 {
-    cout<<"\t*****Changing The Status*****"<<endl;
-    string bgname,bgid;
+    cout << "\t*****Changing The Status*****" << endl;
+    string bgname, bgid;
     int bgstatus;
-    cout<<"Enter the bugname: ";
-    cin>>bgname;
-    cout<<"Enter the bug id: ";
-    cin>>bgid;
+    cout << "Enter the bugname: ";
+    cin >> bgname;
+    cout << "Enter the bug id: ";
+    cin >> bgid;
     string ed(".txt");
-    bgname=bgname+bgid+ed;
+    string dash("-");
+    string directory("..\\Data\\");
+    string fullpath=directory + bgname+dash+bgid+ed;
     fstream my_file;
-    my_file.open(bgname);
+    my_file.open(fullpath);
     my_file.seekp(0,ios::end);
     cout<< "Enter the bug status by choosing one of the following:\n 1. Not yet assigned\n 2. In process\n 3. Fixed\n 4. Delivered\n";
     cout<<"Your choice: ";
@@ -156,7 +214,7 @@ void changestat(string user)
     time_t CurrentTime;
     time(&CurrentTime);
     my_file<<"Status of the bug updated by "<<user<<" at "<<ctime(&CurrentTime)<<endl;
-    my_file<<"Bug status:\n\t"<<endl;
+    my_file << "Bug status: \t";// << endl;
     switch(bgstatus)
     {
     case 1:
@@ -190,18 +248,23 @@ void changestat(string user)
 /*Function to get report on a bug*/
 void getreport()
 {
-    string bgname,line;
+    string bgname,line;  
     int bgid;
     cout<<"\t*****Reporting the Bug*****"<<endl;
+    cout << "\tPossible Bugs:" << endl;
+    system("dir ..\\Data\\*.txt");
     cout<<"Enter the bugname: ";
-    cin>>bgname;
+    cin>>bgname;   
     cout<<"Enter the bug id: ";
     cin>>bgid;
     string pp=to_string(bgid);
+    string dash("-");
     string en=".txt";
-    bgname=bgname+pp+en;
-    fstream my_file(bgname);
-    cout<<"********* "<<bgname<<bgid<<" *********"<<endl;
+    string directory = "..\\Data\\";
+    string fullpath=directory+bgname+dash+pp+en;
+    fstream my_file(fullpath);
+    //cout << "********* " << bgname << bgid << " *********" << endl;
+    cout<<"********* "<<fullpath<<" *********"<<endl;
     while (std::getline(my_file, line)) {
         cout<<line<<endl;
     }
@@ -222,7 +285,7 @@ void aruser()
     if(ad==1)
     {
         ifstream fin;
-        fin.open("Admin.txt");
+        fin.open("..\\Data\\Admin.out");
         ofstream temp;
         temp.open("temp.txt");
         cout << "Enter the username of the user to be removed: ";
@@ -240,8 +303,8 @@ void aruser()
         }
         temp.close();
         fin.close();
-        remove("Admin.txt");
-        rename("temp.txt","Admin.txt");
+        remove("..\\Data\\Admin.out");
+        rename("temp.txt","..\\Data\\Admin.out");
 
         if(flag!=1)
         {
@@ -274,12 +337,12 @@ void aruser()
         cin>>us;
         cout<<"Enter the password of the new user: ";
         cin>>pw;
-        cout<<"Enter 0 if the user to be added is an admin and any other value if otherwise";
+        cout<<"Enter 0 if the user to be added is an admin and any other value if otherwise";  
         cin>>auth;
         if(auth==0)
         {
             ofstream temp;
-            temp.open("Admin.txt",ifstream::app);
+            temp.open("..\\Data\\Admin.out",ifstream::app);
             temp<<endl;
             temp<<us<<endl;
             temp<<pw<<endl;
@@ -301,7 +364,7 @@ void aruser()
 void checkhist()
 {
     cout<<"\t*****Reporting Login History*****"<<endl;
-    ifstream my_file("Login.txt");
+    ifstream my_file("..\\Data\\Login.out");
     if (my_file.is_open()) {
     std::string line;
     while (std::getline(my_file, line)) {
@@ -316,7 +379,7 @@ void checkhist()
 void logout(string user)
 {
     fstream log_file;
-    log_file.open("Login.txt",fstream::app);
+    log_file.open("..\\Data\\Login.out",fstream::app);
     cout<<"\tLogging Out............."<<endl;
     time_t CurrentTime;
     time(&CurrentTime);
@@ -328,7 +391,7 @@ void ex(string user)
 {
     cout<<endl<<"Exiting... "<<endl;
     fstream log_file;
-    log_file.open("Login.txt",fstream::app);
+    log_file.open("..\\Data\\Login.out",fstream::app);
     time_t CurrentTime;
     time(&CurrentTime);
     log_file<<user<<" exited the program at "<<ctime(&CurrentTime)<<endl;
@@ -375,9 +438,9 @@ int main()
         {
             cout<<"\t\t Welcome "<<username<<"!!"<<endl;
             int choice=0;
-            while(choice!=6 || choice!=7)
+            while((choice!=6 )&& (choice!=7))
             {
-                cout<<"Please choose from an option below:"<<endl;
+                cout<<"\nPlease choose from an option below:"<<endl;
                 cout<<"1. File a new bug\n2. Change the status of the bug\n3. Get report of the bugs\n4. Add/Remove a user to the database\n5. Check login history\n6. Logout\n7. Exit"<<endl;
                 cout<<"Your choice: ";
                 cin>>choice;
@@ -423,7 +486,7 @@ int main()
         {
             cout<<"\t\t Welcome "<<username<<"!!"<<endl;
             int choice=0;
-            while(choice!=4 || choice!=5)
+            while((choice!=4) &&( choice!=5))
             {
                 cout<<"Please choose from an option below:"<<endl;
                 cout<<"1. File a new bug\n2. Change the status of the bug\n3. Get report of the bugs\n4. Logout\n5. Exit"<<endl;
@@ -461,5 +524,5 @@ int main()
             }
         }
     }
-    getch();
+   
 }
