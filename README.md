@@ -10,4 +10,10 @@ Saved all Fogbugz bugs as Microsoft Word docs. Plan to import them either straig
 
 First step was to abhixsmasher version to run; then added some features and comments to make easier. 
 
-That is where this version stands.
+Separated data into Data Folder. Set up to look like this:
+    Bug-Tracker
+        Data
+        Bin
+        
+ That is where it stands now.       
+        
