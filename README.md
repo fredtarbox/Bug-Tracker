@@ -13,6 +13,7 @@ One feature was to put the bug id number as a three digit number and to put it a
 
 Separated ziped data into Data Folder and OutputExamples Folder. 
 Set up to look like this:
+
     Bug-Tracker folder
         Data subfolder
             Admin.out
@@ -20,8 +21,10 @@ Set up to look like this:
             Users.out
             001-FirstBug.txt
             ...(all other bugs)
+            
         Bin subfolder
             BugTracker-Abhix.exe
+            
         OutputExamples subfolder
             AddAUser.txt
             ChangeTheStatusOfTheBug.txt
