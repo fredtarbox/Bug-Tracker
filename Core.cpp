@@ -68,23 +68,31 @@ int check_user(string us,string pw)
 int filebug(int id, string user)
 {
     int n = 0;
+    char bugnum[20];
     char op[200];
     time_t CurrentTime;
-    char name[200], bugtype[50];
+    char name[200];
+    //char bugtype[50];
     char bugdescription[50][100];
     char bugpriority[30];
-    int bugstatus;
+    //int bugstatus;
     struct stat statbuf;
     char newname[200];
+    int scancount;
     int i;
     FILE* ptr;
     printf("**********FILING A BUG***********\n");
     time(&CurrentTime);
+    printf(  "\tCurrent Bug List:\n" );
+    system("dir ..\\Data\\*.txt");
+    printf("Enter the next available bug number (Maximum of 999 bugs):\n");
+    scancount = scanf("%s", bugnum);
+    id = atoi(bugnum);
     while (1) {
         memset(name, 0, sizeof(name));
         printf("Enter the name of the bug (Maximum 25 characters):\n");
-        scanf("%s", name);
-        if (strlen(name) >= 25)
+        scancount = scanf("%s", name);
+        if (scancount >= 25)
         {
             printf("Name of the bug is too long; try again\n");
         }
@@ -93,15 +101,30 @@ int filebug(int id, string user)
         }
     }
     char ids[10];
+    char idsAdjusted[10];
     while (1) {
         _itoa(id, ids, 10);
+        if (id <= 9)
+        {
+            strcpy(idsAdjusted , "00");
+            strcat(idsAdjusted, ids);
+            strcpy(ids, idsAdjusted);
+        }
+        else {
+            if (id <=99)
+            {
+                strcpy(idsAdjusted, "0");
+                strcat(idsAdjusted, ids);
+                strcpy(ids, idsAdjusted);
+            }
+        }
         
         char ex[] = ".txt";
         memset(newname, 0, sizeof(newname));
         strcpy(newname, "..\\Data\\");
-        strcat(newname, name);
-        strcat(newname, "-");
         strcat(newname, ids);
+        strcat(newname, "-");
+        strcat(newname, name);
         strcat(newname, ex);
         printf("Filename : %s\n", newname);
         if (stat(newname, &statbuf) == 0)
@@ -194,20 +217,45 @@ int filebug(int id, string user)
 /*Function to change the status of a bug*/
 void changestat(string user)
 {
+    char ids[10];
+    char idsAdjusted[10];
+    int bgidInt = 0;
     cout << "\t*****Changing The Status*****" << endl;
     string bgname, bgid;
     int bgstatus;
+    printf("\tCurrent Bug List:\n");
+    system("dir ..\\Data\\*.txt");
     cout << "Enter the bugname: ";
     cin >> bgname;
     cout << "Enter the bug id: ";
     cin >> bgid;
+    strcpy(ids, bgid.c_str());
+    bgidInt = atoi(ids);
+    
+    if (bgidInt <= 9)
+    {
+        strcpy(idsAdjusted, "00");
+        strcat(idsAdjusted, ids);
+        strcpy(ids, idsAdjusted);
+    }
+    else {
+        if (bgidInt <= 99)
+        {
+            strcpy(idsAdjusted, "0");
+            strcat(idsAdjusted, ids);
+            strcpy(ids, idsAdjusted);
+        }
+    }
+    bgid = ids;
+    string pp = ids; //to_string(bgid);
     string ed(".txt");
     string dash("-");
     string directory("..\\Data\\");
-    string fullpath=directory + bgname+dash+bgid+ed;
+    string fullpath=directory + bgid + dash + bgname+ed;
     fstream my_file;
     my_file.open(fullpath);
     my_file.seekp(0,ios::end);
+    cout << "Updating " << fullpath <<"\n";
     cout<< "Enter the bug status by choosing one of the following:\n 1. Not yet assigned\n 2. In process\n 3. Fixed\n 4. Delivered\n";
     cout<<"Your choice: ";
     cin>>bgstatus;
@@ -249,6 +297,8 @@ void changestat(string user)
 void getreport()
 {
     string bgname,line;  
+    char idsAdjusted[10];
+    char ids[10];
     int bgid;
     cout<<"\t*****Reporting the Bug*****"<<endl;
     cout << "\tPossible Bugs:" << endl;
@@ -257,13 +307,27 @@ void getreport()
     cin>>bgname;   
     cout<<"Enter the bug id: ";
     cin>>bgid;
-    string pp=to_string(bgid);
+     _itoa(bgid, ids, 10);
+        if (bgid <= 9)
+        {
+            strcpy(idsAdjusted , "00");
+            strcat(idsAdjusted, ids);
+            strcpy(ids, idsAdjusted);
+        }
+        else {
+            if (bgid <=99)
+            {
+                strcpy(idsAdjusted, "0");
+                strcat(idsAdjusted, ids);
+                strcpy(ids, idsAdjusted);
+            }
+        }
+        string pp = ids; //to_string(bgid);
     string dash("-");
     string en=".txt";
     string directory = "..\\Data\\";
-    string fullpath=directory+bgname+dash+pp+en;
+    string fullpath= directory+ pp + dash + bgname+en;
     fstream my_file(fullpath);
-    //cout << "********* " << bgname << bgid << " *********" << endl;
     cout<<"********* "<<fullpath<<" *********"<<endl;
     while (std::getline(my_file, line)) {
         cout<<line<<endl;
