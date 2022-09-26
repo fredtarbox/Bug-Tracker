@@ -373,9 +373,9 @@ void aruser()
         if(flag!=1)
         {
             ifstream fin;
-            fin.open("Users.txt");
+            fin.open("..\\Data\\Users.out");
             ofstream temp;
-            temp.open("temp.txt");
+            temp.open("\\Data\\temp.out");
             while (getline(fin,us))
             {
                 getline(fin,pw);
@@ -389,8 +389,8 @@ void aruser()
             }
             fin.close();
             temp.close();
-            remove("Users.txt");
-            rename("temp.txt","Users.txt");
+            remove("..\\Data\\Users.out");
+            rename("..\\Data\\temp.out","..\\Data\\Users.out");
         }
         cout<<"The user has been removed!!"<<endl;
     }
@@ -415,7 +415,7 @@ void aruser()
         else
         {
             ofstream temp;
-            temp.open("Users.txt",ifstream::app);
+            temp.open("..\\Data\\Users.out",ifstream::app);
             temp<<endl;
             temp<<us<<endl;
             temp<<pw<<endl;
