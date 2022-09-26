@@ -7,7 +7,10 @@
 #include <fstream>
 #include <stdlib.h>
 #include <string.h>
+#include <Windows.h>
 using namespace std;
+
+LPTSTR getDirectory();
 
 /*Function for logging in the user*/
 int check_user(string us,string pw)
@@ -90,9 +93,9 @@ int filebug(int id, string user)
     id = atoi(bugnum);
     while (1) {
         memset(name, 0, sizeof(name));
-        printf("Enter the name of the bug (Maximum 25 characters):\n");
+        printf("Enter the name of the bug (Maximum 100 characters):\n");
         scancount = scanf("%s", name);
-        if (scancount >= 25)
+        if (scancount >= 100)
         {
             printf("Name of the bug is too long; try again\n");
         }
@@ -302,33 +305,64 @@ void getreport()
     int bgid;
     cout<<"\t*****Reporting the Bug*****"<<endl;
     cout << "\tPossible Bugs:" << endl;
-    system("dir ..\\Data\\*.txt");
-    cout<<"Enter the bugname: ";
-    cin>>bgname;   
+    system("dir /b ..\\Data\\*.txt");
+    system("dir /b ..\\Data\\*.txt >> ..\\Data\\bugslist.out");
+    //cout<<"Enter the bugname: ";
+    //cin>>bgname;   
     cout<<"Enter the bug id: ";
     cin>>bgid;
-     _itoa(bgid, ids, 10);
-        if (bgid <= 9)
+    _itoa(bgid, ids, 10);
+    if (bgid <= 9)
+    {
+        strcpy(idsAdjusted , "00");
+        strcat(idsAdjusted, ids);
+        strcpy(ids, idsAdjusted);
+    }
+    else {
+        if (bgid <=99)
         {
-            strcpy(idsAdjusted , "00");
+            strcpy(idsAdjusted, "0");
             strcat(idsAdjusted, ids);
             strcpy(ids, idsAdjusted);
         }
-        else {
-            if (bgid <=99)
-            {
-                strcpy(idsAdjusted, "0");
-                strcat(idsAdjusted, ids);
-                strcpy(ids, idsAdjusted);
-            }
-        }
-        string pp = ids; //to_string(bgid);
+    }
+    string pp = ids; //to_string(bgid);
+    // get full file name
+    
     string dash("-");
-    string en=".txt";
+    //string en = ".txt";
+    string fullpath = "None";
     string directory = "..\\Data\\";
-    string fullpath= directory+ pp + dash + bgname+en;
+    string dirfilename = "bugsList.out";
+    string bugsList = directory  + dirfilename;
+    fstream my_dir(bugsList);
+    char curName[200];
+    while (std::getline(my_dir, line)) {
+        
+        memset(curName, 0, sizeof(curName));
+        strncpy(curName, line.c_str(), sizeof(curName));
+        if (strncmp(curName, pp.c_str(), 3) == 0) {
+            pp = curName;
+            break;
+        }
+    }
+    my_dir.close();
+    LPTSTR curdir = getDirectory();
+    int answer = remove("bugsList.out");
+    
+    //string dash("-");
+    string en=".txt";
+    //string directory = "..\\Data\\";
+    curdir = getDirectory();
+    fullpath = directory + pp;
     fstream my_file(fullpath);
-    cout<<"********* "<<fullpath<<" *********"<<endl;
+    cout << "********* " << fullpath << " *********" << endl;
+    if (fullpath == "None") {
+        cout << "Bug does not exist:" << pp << endl;
+    }
+  
+    curdir = getDirectory();
+   
     while (std::getline(my_file, line)) {
         cout<<line<<endl;
     }
@@ -589,4 +623,16 @@ int main()
         }
     }
    
+}
+LPTSTR  getDirectory()
+{ /*DWORD GetCurrentDirectory(
+  [in]  DWORD  nBufferLength,
+  [out] LPTSTR lpBuffer);
+   */
+    static TCHAR  buffer[200];
+    memset(buffer, 0, sizeof(buffer));
+    LPTSTR lpBuffer = &buffer[0];
+    GetCurrentDirectory(200, lpBuffer);
+    //cout << lpBuffer << endl;
+    return lpBuffer;
 }
