@@ -72,6 +72,7 @@ int filebug(int id, string user)
 {
     int n = 0;
     char bugnum[20];
+    
     char op[200];
     time_t CurrentTime;
     char name[200];
@@ -87,13 +88,14 @@ int filebug(int id, string user)
     printf("**********FILING A BUG***********\n");
     time(&CurrentTime);
     printf(  "\tCurrent Bug List:\n" );
-    system("dir ..\\Data\\*.txt");
-    printf("Enter the next available bug number (Maximum of 999 bugs):\n");
+    system("dir /b ..\\Data\\*.txt");
+    printf("\nEnter the next available bug number (Maximum of 999 bugs):\n");
     scancount = scanf("%s", bugnum);
     id = atoi(bugnum);
+   
     while (1) {
         memset(name, 0, sizeof(name));
-        printf("Enter the name of the bug (Maximum 100 characters):\n");
+        printf("\nEnter the name of the bug (Maximum 100 characters; use '_' instead of space ' '):\n");
         scancount = scanf("%s", name);
         if (scancount >= 100)
         {
@@ -146,9 +148,9 @@ int filebug(int id, string user)
     }
     fprintf(ptr, "DATE AND TIME : %s",
         ctime(&CurrentTime));
-    fprintf(ptr, "BUG ID    :    %d\n", id);
+    fprintf(ptr, "BUG ID    :    %s\n", ids);
     fprintf(ptr, "\n");
-    printf("BUG ID:%d\n", id);
+    printf("BUG ID:%s\n", ids);
     n = (int)user.length();
     //char op[n+1];
     strcpy(op, user.c_str());
@@ -157,7 +159,7 @@ int filebug(int id, string user)
     fprintf(ptr, "\n");
     while (1) {
         memset(bugpriority, 0, sizeof(bugpriority));
-        printf("Enter name of bug priority: Severity is of 5 types:\n    Critical, Major, Moderate, Minor, and Cosmetic.\n");
+        printf("\nEnter name of bug priority: Severity is of 5 types:\n    Critical, Major, Moderate, Minor, and Cosmetic.\n");
         scanf(" %[^\n]s", bugpriority);
         if (strcmp(bugpriority, "Critical") == 0)break;
         if (strcmp(bugpriority, "Major") == 0)break;
@@ -170,7 +172,7 @@ int filebug(int id, string user)
     fprintf(ptr, "BUG PRIORITY: %s\n",
         bugpriority);
     fprintf(ptr, "\n");
-    printf("Enter the bug description:\n(Fifty (50) lines maximum - last line must only contain '#'\n");
+    printf("\nEnter the bug description:\n(Fifty (50) lines maximum - last line must only contain '#'\n");
     for (i = 0; i < 50; i++)
     {
     
@@ -228,9 +230,9 @@ void changestat(string user)
     int bgstatus;
     printf("\tCurrent Bug List:\n");
     system("dir ..\\Data\\*.txt");
-    cout << "Enter the bugname: ";
+    cout << "\nEnter the bugname: ";
     cin >> bgname;
-    cout << "Enter the bug id: ";
+    cout << "\nEnter the bug id: ";
     cin >> bgid;
     strcpy(ids, bgid.c_str());
     bgidInt = atoi(ids);
@@ -259,7 +261,7 @@ void changestat(string user)
     my_file.open(fullpath);
     my_file.seekp(0,ios::end);
     cout << "Updating " << fullpath <<"\n";
-    cout<< "Enter the bug status by choosing one of the following:\n 1. Not yet assigned\n 2. In process\n 3. Fixed\n 4. Delivered\n";
+    cout<< "\nEnter the bug status by choosing one of the following:\n 1. Not yet assigned\n 2. In process\n 3. Fixed\n 4. Delivered\n";
     cout<<"Your choice: ";
     cin>>bgstatus;
     time_t CurrentTime;
@@ -309,7 +311,7 @@ void getreport()
     system("dir /b ..\\Data\\*.txt >> ..\\Data\\bugslist.out");
     //cout<<"Enter the bugname: ";
     //cin>>bgname;   
-    cout<<"Enter the bug id: ";
+    cout<<"\nEnter the bug id: ";
     cin>>bgid;
     _itoa(bgid, ids, 10);
     if (bgid <= 9)
@@ -377,7 +379,7 @@ void aruser()
     string us(""),pw("");
     cout<<"\t*****Adding/Removing a User*****"<<endl;
     int ad;
-    cout<<"Enter 1 to remove a user and otherwise to add: ";
+    cout<<"\nEnter 1 to remove a user and otherwise to add: ";
     cin>>ad;
     int flag=0;
     if(ad==1)
@@ -386,7 +388,7 @@ void aruser()
         fin.open("..\\Data\\Admin.out");
         ofstream temp;
         temp.open("temp.txt");
-        cout << "Enter the username of the user to be removed: ";
+        cout << "\nEnter the username of the user to be removed: ";
         cin >> nwuser;
         while (getline(fin,us))
         {
@@ -431,11 +433,11 @@ void aruser()
     else
     {
         int auth;
-        cout<<"Enter the username of the user to be added: ";
+        cout<<"\nEnter the username of the user to be added: ";
         cin>>us;
-        cout<<"Enter the password of the new user: ";
+        cout<<"\nEnter the password of the new user: ";
         cin>>pw;
-        cout<<"Enter 0 if the user to be added is an admin and any other value if otherwise";  
+        cout<<"\nEnter 0 if the user to be added is an admin and any other value if otherwise";  
         cin>>auth;
         if(auth==0)
         {
@@ -499,12 +501,33 @@ void ex(string user)
 /*Driver code*/
 int main()
 {
-    cout<<"********************** WELCOME TO THE BUG TRACKING SYSTEM **********************"<<endl;
+  
     int exit=0;
     int flag=0;
     int count=0;
     int id=0;
     string username,password;
+    int chooseColor = 0;
+    WORD color = 113;
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    if (chooseColor == 0) {
+        SetConsoleTextAttribute(hConsole, color);
+    }
+    else {
+        // you can loop k higher to see more color choices
+        for (int k = 1; k < 252; k++)
+        {
+            // pick the colorattribute k you want
+            SetConsoleTextAttribute(hConsole, k);
+            cout << k << " I want to be nice today!" << endl;
+
+        }
+        cout << "\nEnter color choice" << endl;
+        cin >> color;
+        SetConsoleTextAttribute(hConsole, color);
+    }
+    system("CLS");
+    cout << "********************** WELCOME TO THE BUG TRACKING SYSTEM **********************" << endl;
     while(exit!=1)
     {
         flag=0;
@@ -534,8 +557,10 @@ int main()
         }
         else if(flag==1)
         {
+           
             cout<<"\t\t Welcome "<<username<<"!!"<<endl;
             int choice=0;
+           
             while((choice!=6 )&& (choice!=7))
             {
                 cout<<"\nPlease choose from an option below:"<<endl;
