@@ -38,7 +38,7 @@ int check_user(string us,string pw)
     my_file.close();
     if(fg!=1 && fg!=3)
     {
-        my_file.open("Users.txt");
+        my_file.open("..\\Data\\Users.out");
         while(!my_file.eof())
         {
             my_file>>user;
