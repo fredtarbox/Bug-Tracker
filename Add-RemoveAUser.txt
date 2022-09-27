@@ -6,17 +6,16 @@ Please choose from an option below:
 5. Check login history
 6. Logout
 7. Exit
-Your choice: 5
-        *****Reporting Login History*****
-admin logged in at Tue Sep 27 07:51:45 2022
+Your choice: 4
+        *****Adding/Removing a User*****
 
-admin logged in at Tue Sep 27 08:04:27 2022
+Enter 1 to remove a user and otherwise to add: 0
 
-admin logged in at Tue Sep 27 09:16:29 2022
+Enter the username of the user to be added: guest
 
-admin logged in at Tue Sep 27 09:20:39 2022
+Enter the password of the new user: password
 
-
+Enter 0 if the user to be added is an admin and any other value if otherwise9
 
 Please choose from an option below:
 1. File a new bug

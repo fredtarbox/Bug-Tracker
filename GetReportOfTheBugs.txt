@@ -9,38 +9,25 @@ Please choose from an option below:
 Your choice: 3
         *****Reporting the Bug*****
         Possible Bugs:
- Volume in drive P is DMACData
- Volume Serial Number is A8FF-1019
+001-This_is_the_first_bug_reported.txt
 
- Directory of P:\BugTracker\Data
-
-09/24/2022  04:57 PM               324 bugtest-1.txt
-09/24/2022  04:24 PM               464 bugtracker-1.txt
-09/25/2022  11:00 AM               435 chicken-1.txt
-09/25/2022  11:33 AM               108 pig-1.txt
-09/25/2022  11:37 AM               303 SaveScreen-1.txt
-09/25/2022  11:48 AM               397 ShowFileANewBug-1.txt
-09/25/2022  10:55 AM               298 turkey-1.txt
-               7 File(s)          2,329 bytes
-               0 Dir(s)  212,719,779,840 bytes free
-Enter the bugname: showfileanewbug
 Enter the bug id: 1
-********* ..\Data\showfileanewbug-1.txt *********
-DATE AND TIME : Sun Sep 25 11:38:30 2022
-BUG ID    :    1
+********* ..\Data\001-This_is_the_first_bug_reported.txt *********
+DATE AND TIME : Tue Sep 27 07:52:04 2022
+BUG ID    :    001
 
 BUG FILED BY: admin
 
 BUG PRIORITY: Minor
 
 BUG DESCRIPTION:
-     Hoping to capture process 1. File a new bug
-     both the pig, chicken, and turkey failed.
+     so we plan to document here
+     and to have up to 50 lines.
      #
 
-DATE AND TIME: Sun Sep 25 11:38:30 2022
+DATE AND TIME: Tue Sep 27 07:52:04 2022
 BUG STATUS: NOT YET ASSIGNED
-Status of the bug updated by admin at Sun Sep 25 11:48:22 2022
+Status of the bug updated by admin at Tue Sep 27 09:16:47 2022
 
 Bug status:     In process
 
@@ -53,3 +40,4 @@ Please choose from an option below:
 5. Check login history
 6. Logout
 7. Exit
+Your choice:

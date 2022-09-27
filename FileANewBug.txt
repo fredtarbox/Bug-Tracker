@@ -1,3 +1,4 @@
+
 Please choose from an option below:
 1. File a new bug
 2. Change the status of the bug
@@ -8,17 +9,25 @@ Please choose from an option below:
 7. Exit
 Your choice: 1
 **********FILING A BUG***********
-Enter the name of the bug (Maximum 25 characters):
-ShowFileANewBug
-Filename : ..\Data\ShowFileANewBug-1.txt
-BUG ID:1
+        Current Bug List:
+File Not Found
+
+Enter the next available bug number (Maximum of 999 bugs):
+1
+
+Enter the name of the bug (Maximum 100 characters; use '_' instead of space ' '):
+This_is_the_first_bug_reported
+Filename : ..\Data\001-This_is_the_first_bug_reported.txt
+BUG ID:001
+
 Enter name of bug priority: Severity is of 5 types:
     Critical, Major, Moderate, Minor, and Cosmetic.
 Minor
+
 Enter the bug description:
 (Fifty (50) lines maximum - last line must only contain '#'
-Hoping to capture process 1. File a new bug
-both the pig, chicken, and turkey failed.
+so we plan to document here
+and to have up to 50 lines.
 #
 Status of bug:
    1. NOT YET ASSIGNED
@@ -35,3 +44,4 @@ Please choose from an option below:
 5. Check login history
 6. Logout
 7. Exit
+Your choice:

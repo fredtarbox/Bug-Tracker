@@ -1,4 +1,3 @@
-Please choose from an option below:
 1. File a new bug
 2. Change the status of the bug
 3. Get report of the bugs
@@ -8,8 +7,12 @@ Please choose from an option below:
 7. Exit
 Your choice: 2
         *****Changing The Status*****
-Enter the bugname: showfileanewbug
+        Current Bug List:
+001-This_is_the_first_bug_reported.txt
+
 Enter the bug id: 1
+Updating ..\Data\001-This_is_the_first_bug_reported.txt
+
 Enter the bug status by choosing one of the following:
  1. Not yet assigned
  2. In process
@@ -25,3 +28,4 @@ Please choose from an option below:
 5. Check login history
 6. Logout
 7. Exit
+Your choice:
